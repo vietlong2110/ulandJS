@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "isomorphic-fetch": "^2.2.1",
+    "mongoose": "^4.11.4"
+  },
+  "name": "uland",
+  "version": "1.0.0",
+  "description": "web chon loc moi gioi theo ho so uy tin",
+  "main": "app.js",
+  "author": "Long Le",
+  "license": "MIT"
+}
