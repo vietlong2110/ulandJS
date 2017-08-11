@@ -10,12 +10,14 @@ const getListComments = async(projectId, offset = DEFAULT_OFFSET, range = DEFAUL
     .sort({ postedTime: -1 })
     .skip(offset)
     .limit(range)
+    .lean()
     .exec();
     if (!commentList)
       return Promise.resolve([]);
     let list = [];
     for (i in commentList) {
       let { name, content, projectId, postedTime } = commentList[i];
+      postedTime.setUTCHours(10);
       let day = postedTime.getDate() < 10 ? '0' + postedTime.getDate() : postedTime.getDate();
       let month = postedTime.getMonth() + 1 < 10 ? '0' + (postedTime.getMonth() + 1) : postedTime.getMonth() + 1;
       let year = postedTime.getFullYear();
@@ -34,8 +36,6 @@ const getListComments = async(projectId, offset = DEFAULT_OFFSET, range = DEFAUL
 };
 
 const addCommentToProject = async(projectId, name, content) => {
-  let postedTime = new Date();
-  postedTime.setUTCHours(15); //GMT +7
   let newComment = new Models.Comments({
     name, content, projectId, postedTime
   });
