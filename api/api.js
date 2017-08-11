@@ -107,7 +107,7 @@ router.get('/search-map', async(req, res) => {
 router.get('/comment', async(req, res) => {
   let { id, offset, range } = req.query;
   try {
-    let commentList = await Controllers.Comment.getListComments(id, offset, range);
+    let commentList = await Controllers.Comment.getListComments(id, +offset, +range);
     res.json({ commentList });
   } catch(err) {
     res.json({ err });
