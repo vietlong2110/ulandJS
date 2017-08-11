@@ -17,7 +17,7 @@ const getListComments = async(projectId, offset = DEFAULT_OFFSET, range = DEFAUL
     let list = [];
     for (i in commentList) {
       let { name, content, projectId, postedTime } = commentList[i];
-      postedTime.setUTCHours(10);
+      postedTime.setUTCHours(postedTime.getUTCHours() + 7);
       let day = postedTime.getDate() < 10 ? '0' + postedTime.getDate() : postedTime.getDate();
       let month = postedTime.getMonth() + 1 < 10 ? '0' + (postedTime.getMonth() + 1) : postedTime.getMonth() + 1;
       let year = postedTime.getFullYear();
@@ -37,7 +37,7 @@ const getListComments = async(projectId, offset = DEFAULT_OFFSET, range = DEFAUL
 
 const addCommentToProject = async(projectId, name, content) => {
   let newComment = new Models.Comments({
-    name, content, projectId, postedTime
+    name, content, projectId
   });
   try {
     await newComment.save();
