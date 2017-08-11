@@ -80,9 +80,9 @@ const Housings = new Schema({
     type: String,
     // es_indexed: true
   }],
-  videoURL: [{
+  videoURL: {
     type: String
-  }],
+  },
   generalInfo: {
     type: String,
     // es_indexed: true

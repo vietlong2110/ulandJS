@@ -74,13 +74,13 @@ const importHousings = async() => {
     let {
       id, name, level, address, seller, timeToReceive, numberOfHouses,
       buildingDensity, priceInTotal, priceInArea, area, coordinate, imageURL,
-      housingType
+      videoURL, housingType
     } = housings[i];
     let newHouse = new Housings({
       _id: id,
       name, level, address, seller, timeToReceive, numberOfHouses,
       buildingDensity, priceInTotal, priceInArea, area, coordinate, imageURL,
-      housingType
+      videoURL, housingType
     });
     try {
       let house = await Housings.findById(id).exec();
