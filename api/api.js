@@ -108,9 +108,12 @@ router.get('/comment', async(req, res) => {
   let { id, offset, range } = req.query;
   try {
     let commentList = await Controllers.Comment.getListComments(id, +offset, +range);
-    res.json({ commentList });
+    res.status(200).json({
+      success: true,
+      commentList
+    });
   } catch(err) {
-    res.json({ err });
+    res.status(404).json({ err });
   }
 });
 
@@ -118,11 +121,11 @@ router.post('/comment', async(req, res) => {
   let { projectId, name, content } = req.body;
   try {
     await Controllers.Comment.addCommentToProject(projectId, name, content);
-    res.json({
+    res.status(200).json({
       success: true
     })
   } catch(err) {
-    res.json({ err });
+    res.status(500).json({ err });
   }
 });
 
@@ -130,11 +133,11 @@ router.delete('/comment', async(req, res) => {
   let id = req.body.id;
   try {
     await Controllers.Comment.deleteCommentFromProject(id);
-    res.json({
+    res.status(200).json({
       success: true
     });
   } catch(err) {
-    res.json({ err });
+    res.status(404).json({ err });
   }
 });
 
