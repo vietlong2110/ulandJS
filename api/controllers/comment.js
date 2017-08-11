@@ -1,6 +1,6 @@
 const Models = require('../database');
 
-const getListComments = async(projectId) => {
+const getListComments = async(projectId, offset, range) => {
   try {
     let commentList = await Models.Comments.find({ projectId }).exec();
     if (!commentList)
@@ -8,6 +8,12 @@ const getListComments = async(projectId) => {
     let list = [];
     for (i in commentList) {
       let { name, content, projectId, postedTime } = commentList[i];
+      let day = postedTime.getDate();
+      let month = postedTime.getMonth() + 1;
+      let year = postedTime.getFullYear();
+      let hour = postedTime.getHours();
+      let minute = postedTime.getMinutes();
+      postedTime = day + '-' + month + '-' + year + ', ' + hour + ':' + minute;
       list = list.concat({
         id: commentList._id,
         name, content, projectId, postedTime
