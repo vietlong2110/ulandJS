@@ -25,20 +25,20 @@ router.get('/search-map', async(req, res) => {
   }
 });
 
-// router.get('/chung-cu', async(req, res) => {
-//   try {
-//     let { offset, size } = req.query;
-//     let list = await Controllers.List.Apartments(offset, size);
-//     res.json({
-//       list
-//     });
-//   } catch(err) {
-//     res.json({
-//       err
-//     });
-//   }
-// });
-//
+router.get('/chung-cu', async(req, res) => {
+  try {
+    let { offset, size } = req.query;
+    let list = await Controllers.List.Apartments(offset, size);
+    res.json({
+      list
+    });
+  } catch(err) {
+    res.json({
+      err
+    });
+  }
+});
+
 // router.get('/biet-thu', async(req, res) => {
 //   try {
 //     let { offset, size } = req.query;

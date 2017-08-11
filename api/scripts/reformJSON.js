@@ -12,7 +12,7 @@ let resultDetailCC = [];
 let resultDetailBT = [];
 let resultDT = [];
 let id, name, level, address, seller, timeToReceive, numberOfHouses,
-buildingDensity, priceInTotal, priceInArea, area, coordinate, imageURL,
+buildingDensity, priceInTotal, priceInArea, area, coordinate, imageURL, videoURL,
 generalInfo, detailInfo, exchange, position, listProjectId, cv, profilePicture,
 phone, email, born;
 
@@ -48,12 +48,13 @@ for (let i = 1; i < jsonCC.length; i++) {
   };
   coordinate = [+current[21], +current[20]];
   imageURL = [];
-  for (let j = 22; j < current.length; j++)
+  for (let j = 22; j < 27; j++)
     if (current[j] !== null && current[j] !== '' && current[j].substring(0,4) === 'http')
       imageURL = imageURL.concat(current[j]);
+  videoURL = current[27];
   resultCC = resultCC.concat({
     id, name, level, address, seller, timeToReceive, numberOfHouses,
-    buildingDensity, priceInTotal, priceInArea, area, coordinate, imageURL,
+    buildingDensity, priceInTotal, priceInArea, area, coordinate, imageURL, videoURL,
     housingType: 'CC'
   });
 }
