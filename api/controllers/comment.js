@@ -1,8 +1,16 @@
 const Models = require('../database');
 
-const getListComments = async(projectId, offset, range) => {
+const DEFAULT_OFFSET = 0;
+const DEFAULT_RANGE = 5;
+
+const getListComments = async(projectId, offset = DEFAULT_OFFSET, range = DEFAULT_RANGE) => {
   try {
-    let commentList = await Models.Comments.find({ projectId }).exec();
+    let commentList = await Models.Comments
+    .find({ projectId })
+    .sort({ postedTime: -1 })
+    .skip(offset)
+    .limit(range)
+    .exec();
     if (!commentList)
       return Promise.resolve([]);
     let list = [];
