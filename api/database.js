@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { Housings, Partners } = require('./models');
+const { Housings, Partners, Comments } = require('./models');
 
 let hostname = process.env.NODE_ENV === 'production' ||
   process.env.NODE_ENV === 'development' ? 'mongo': 'localhost';
@@ -20,8 +20,10 @@ let housings = mongoose.model('Housings', Housings);
 // housings.synchronize();
 
 let partners = mongoose.model('Partners', Partners);
+let comments = mongoose.model('Comments', Comments);
 
 module.exports = {
   Housings: housings,
-  Partners: partners
+  Partners: partners,
+  Comments: comments
 };

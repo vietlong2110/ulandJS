@@ -25,19 +25,19 @@ router.get('/search-map', async(req, res) => {
   }
 });
 
-router.get('/chung-cu', async(req, res) => {
-  try {
-    let { offset, size } = req.query;
-    let list = await Controllers.List.Apartments(offset, size);
-    res.json({
-      list
-    });
-  } catch(err) {
-    res.json({
-      err
-    });
-  }
-});
+// router.get('/chung-cu', async(req, res) => {
+//   try {
+//     let { offset, size } = req.query;
+//     let list = await Controllers.List.Apartments(offset, size);
+//     res.json({
+//       list
+//     });
+//   } catch(err) {
+//     res.json({
+//       err
+//     });
+//   }
+// });
 
 // router.get('/biet-thu', async(req, res) => {
 //   try {
@@ -103,5 +103,39 @@ router.get('/chung-cu', async(req, res) => {
 //     });
 //   }
 // });
+
+router.get('/comment', async(req, res) => {
+  let id = req.query.id;
+  try {
+    let commentList = await Controllers.Comment.getListComments(id);
+    res.json({ commentList });
+  } catch(err) {
+    res.json({ err });
+  }
+});
+
+router.post('/comment', async(req, res) => {
+  let { projectId, name, content } = req.body;
+  try {
+    await Controllers.Comment.addCommentToProject(projectId, name, content);
+    res.json({
+      success: true
+    })
+  } catch(err) {
+    res.json({ err });
+  }
+});
+
+router.delete('/comment', async(req, res) => {
+  let id = req.body.id;
+  try {
+    await Controllers.Comment.deleteCommentFromProject(id);
+    res.json({
+      success: true
+    });
+  } catch(err) {
+    res.json({ err });
+  }
+});
 
 module.exports = router;
