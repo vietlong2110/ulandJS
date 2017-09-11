@@ -1,3 +1,5 @@
+const sanitize = require('sanitize-html');
+
 const Models = require('../database');
 
 const DEFAULT_OFFSET = 0;
@@ -36,6 +38,7 @@ const getListComments = async(projectId, offset = DEFAULT_OFFSET, range = DEFAUL
 };
 
 const addCommentToProject = async(projectId, name, content) => {
+  name = sanitize(name); content = sanitize(content);
   let newComment = new Models.Comments({
     name, content, projectId
   });
